@@ -1,20 +1,27 @@
 #include <iostream>
+using namespace std;
 
 int main(void){
-    int N,M;
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
-    scanf("%d %d",&N,&M);
+    int N,M;
+    cin >> N >> M;
     
-    unsigned int sum[100001];
+    int* sum = new int[N+1];
+    int* ptr = sum;
     int start, end, tem;
 
-    sum[0] = 0;
-    for(int i=0; i<N; i++){
-        scanf("%d",&tem);
-        sum[i+1] = sum[i] + tem;
+    *ptr++ = 0;
+    while(N--){
+        cin >> tem;
+        *ptr = *(ptr-1) + tem;
+        ptr++;
     }
     while(M--){
-        scanf("%d %d",&start,&end);
-        printf("%d\n",sum[end]-sum[start-1]);
+        cin >> start >> end;
+        cout << sum[end] - sum[start-1] << "\n";
     }
+    delete[] sum;
 }
