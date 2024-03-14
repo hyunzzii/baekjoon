@@ -11,7 +11,7 @@ int main(void){
     long long int tem,sum=0;
     cin >> N >> M;
     
-    long long int* arr = new long long int[N+1];
+    int* arr = new int[N+1];
     long long int* mod = new long long int[M];
 
     fill_n(mod,M,0);
