@@ -1,16 +1,11 @@
 #include <iostream>
-#include <cstring>
 #include <vector>
 using namespace std;
 
 int main(void){
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-
     int N;
     int sum = 0;
-    cin >> N;
+    scanf("%d",&N);
     
     for(int i=1;;i+=2){
         if((N/i) - (i/2) < 1)break;
@@ -25,5 +20,5 @@ int main(void){
         }
     }
     
-    cout << sum;
+    printf("%d",sum);
 }
