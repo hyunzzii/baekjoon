@@ -8,8 +8,8 @@ int main(void){
     cin.tie(NULL);
     cout.tie(NULL);
 
-    long long int N;
-    long long int sum = 0;
+    int N;
+    int sum = 0;
     cin >> N;
     
     for(int i=1;;i+=2){
