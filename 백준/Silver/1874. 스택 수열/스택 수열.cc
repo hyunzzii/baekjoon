@@ -7,29 +7,29 @@ int main(void){
     ios::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
+
+    int n, now, num=1, top=0, index=0;
+    int stack[100001];
+    char str[400001];
     
-    int n, now, num=1;
-    stack<int> s;
     cin >> n;
-    
-    vector<string> result;
     while(n--){
         cin >> now;
         while(true){
-            if(s.size() && s.top() == now){
-                s.pop();
-                result.push_back("-");
+            if(top && stack[top] == now){
+                top--;
+                str[index++]='-';
+                str[index++]='\n';
                 break;
             }
-            if(s.size() && s.top() > now){
+            if(top && stack[top] > now){
                 cout << "NO";
                 return 0;
             }
-            s.push(num++);
-            result.push_back("+");
+            stack[++top] = num++;
+            str[index++]='+';
+            str[index++]='\n';
         }
     }
-    for(int i=0;i<result.size();i++){
-        cout << result[i] << "\n";
-    }
+    cout << str;
 }
