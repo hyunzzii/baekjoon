@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <stack>
 using namespace std;
 typedef pair<int,int> node;
 
@@ -8,19 +8,22 @@ int main(void){
     cin.tie(NULL);
     cout.tie(NULL);
 
-    int n, tem, top=0, result[1000001]={0,};
+    int n, tem;
+    stack<node> stack;
     
     cin >> n;
-    node* stack = new node[n];
-
+    int result[n];
+    
     for(int i=0;i<n;i++){
         cin >> tem;
-        while(top && stack[top].first < tem){
-            result[stack[top--].second] = tem;
+        while(!stack.empty() && stack.top().first < tem){
+            result[stack.top().second] = tem;
+            stack.pop();
         }
-        stack[++top] = make_pair(tem,i);
+        stack.push(make_pair(tem,i));
+        result[i] = -1;
     }
     for(int i=0;i<n;i++){
-        cout << (result[i] ? result[i] : -1) << ' ';
+        cout << result[i] << ' ';
     }
 }
