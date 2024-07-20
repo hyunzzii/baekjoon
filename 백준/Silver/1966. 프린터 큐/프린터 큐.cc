@@ -1,21 +1,18 @@
-#include <iostream>
+#include<stdio.h>
 #include <algorithm>
 using namespace std;
 
 int main(void){
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-
-    int T,N,M;
-    cin >> T;
+    int T;
+    scanf("%d",&T);
 
     while(T-- > 0){
-        cin >> N >> M;
+        int N,M;
+        scanf("%d %d",&N,&M);
 
         int origin[N], prio[N];
         for(int i=0; i<N; i++){
-            cin >> origin[i];
+            scanf("%d",&origin[i]);
             prio[i] = -origin[i];
         }
         sort(prio,prio+N);
@@ -30,7 +27,6 @@ int main(void){
             count++;
             if(o==M)break;
         }
-        cout << count;
-        cout << '\n';
+        printf("%d\n",count);
     }
 }
