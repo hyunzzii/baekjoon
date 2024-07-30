@@ -30,9 +30,6 @@ void bfs(){
 				arr[x1][y1]=3;
 				continue;
 			}
-			if(arr[x1][y1]==0){
-				ans[x1][y1] = 0;
-			}
 		}
 	}
 }
