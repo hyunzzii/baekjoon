@@ -1,7 +1,5 @@
 #include <cstdio>
-#include <tuple>
 #include <queue>
-#include <unistd.h>
 using namespace std;
 typedef struct node{
 	int x;
