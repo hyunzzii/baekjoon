@@ -1,4 +1,4 @@
-#include <cstdio>
+#include <iostream>
 #include <queue>
 using namespace std;
 typedef pair<int,int> node;
@@ -31,11 +31,15 @@ void bfs(){
 }
 
 int main(int argc, char const *argv[]){
-	scanf("%d %d", &n, &m);
+	ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+
+	cin >> n >> m;
 	
 	for(int x=0; x<n; x++){
 		for(int y=0; y<m; y++){
-			scanf("%d", &arr[x][y]);
+			cin >> arr[x][y];
 			ans[x][y] = arr[x][y] ? -1 : 0;
 			if(arr[x][y] == 2){
 				que.push(make_pair(x,y));
@@ -48,8 +52,8 @@ int main(int argc, char const *argv[]){
 
 	for(int x=0; x<n; x++){
 		for(int y=0; y<m; y++){
-			printf("%d ",ans[x][y]);
+			cout << ans[x][y] << ' ';
 		}
-		printf("\n");
+		cout << '\n';
 	}
 }
