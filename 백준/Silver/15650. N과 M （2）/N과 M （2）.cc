@@ -1,4 +1,3 @@
-#include <algorithm>
 #include <stdio.h>
 using namespace std;
 
@@ -15,9 +14,6 @@ void func(int num, int index){
         printf("\n");
         return;
     }
-
-    if(n-num < m-1-index) return;
-
     for(int i=num+1; i<n+1; i++){
         func(i,index+1);
     }
