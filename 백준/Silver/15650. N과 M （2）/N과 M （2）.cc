@@ -1,5 +1,5 @@
 #include <algorithm>
-#include <iostream>
+#include <stdio.h>
 using namespace std;
 
 int n,m;
@@ -10,9 +10,9 @@ void func(int num, int index){
 
     if(index == m-1){
         for(int i=0;i<=index;i++){
-            cout << arr[i] << " ";
+            printf("%d ",arr[i]);
         }
-        cout << "\n";
+        printf("\n");
         return;
     }
 
@@ -24,11 +24,7 @@ void func(int num, int index){
 }
 
 int main(void){
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-
-    cin >> n >> m;
+    scanf("%d %d",&n,&m);
 
     for(int i=1;i<=n;i++){
         func(i, 0);
