@@ -1,17 +1,16 @@
-// #include <stdio.h>
 #include <iostream>
 #include <cstdlib>
 #include <queue>
-#include <utility>
 using namespace std;
-typedef pair<int,int> node;
 
 struct cmp{
-    bool operator()(node &n1, node &n2){
-        if(n1.first == n2.first){
-            return n1.second > n2.second;
+    bool operator()(int n1, int n2){
+        int abs_n1 = abs(n1);
+        int abs_n2 = abs(n2);
+        if(abs_n1 == abs_n2){
+            return n1 > n2;
         }
-        return n1.first > n2.first;
+        return abs(n1) > abs(n2);
     }
 };
 
@@ -20,7 +19,7 @@ int main(void){
     cin.tie(NULL);
 
     int n,x;
-    priority_queue<node,vector<node>,cmp> queue;
+    priority_queue<int, vector<int>, cmp> queue;
     cin >> n;
     while(n--){
         cin >> x;
@@ -29,11 +28,10 @@ int main(void){
                 cout << "0\n";
                 continue;
             }
-            cout << queue.top().second << '\n';
+            cout << queue.top() << '\n';
             queue.pop();
             continue;
         }
-        node tem = make_pair(abs(x),x);
-        queue.push(tem);
+        queue.push(x);
     }
 }
