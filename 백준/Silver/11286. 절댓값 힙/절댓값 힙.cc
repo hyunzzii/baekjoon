@@ -8,13 +8,10 @@ typedef pair<int,int> node;
 
 struct cmp{
     bool operator()(node &n1, node &n2){
-        if(n1.first > n2.first){
-            return true;
+        if(n1.first == n2.first){
+            return n1.second > n2.second;
         }
-        if(n1.first == n2.first && n1.second > n2.second){
-            return true;
-        }
-        return false;
+        return n1.first > n2.first;
     }
 };
 
