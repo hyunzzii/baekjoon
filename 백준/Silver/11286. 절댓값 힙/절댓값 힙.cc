@@ -5,9 +5,7 @@ using namespace std;
 
 struct cmp{
     bool operator()(int n1, int n2){
-        int abs_n1 = abs(n1);
-        int abs_n2 = abs(n2);
-        if(abs_n1 == abs_n2){
+        if(abs(n1) == abs(n2)){
             return n1 > n2;
         }
         return abs(n1) > abs(n2);
