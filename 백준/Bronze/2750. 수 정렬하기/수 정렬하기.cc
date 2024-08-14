@@ -1,22 +1,33 @@
+// #include <stdio.h>
 #include <iostream>
 
+using namespace std;
+
 int main(void){
-    int N;
-    int arr[2001] = {0,};
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
 
-    std::cin >> N;
-    while(N--){
-        int tem;
-        std::cin >> tem;
-        arr[1000 + tem] = 1;
+    int n;
+    cin >> n;
+
+    int arr[n],tem;
+    for(int i=0;i<n;i++){
+        cin >> arr[i];
     }
-
-    int num = 0;
-    for(int i = 0; i < 2001; i++){
-        if(arr[i] == 1){
-            std::cout << i-1000 << std::endl;
-            num++;
-            if(num == N) return 0;
+    for(int i=0;i<n;i++){
+        int flag = 1;
+        for(int j=1;j<n-i;j++){
+            if(arr[j-1]>arr[j]){
+                tem = arr[j-1];
+                arr[j-1] = arr[j];
+                arr[j] = tem;
+                flag = 0;
+            }
         }
+        if(flag) break;
+    }
+    
+    for(int i=0;i<n;i++){
+        cout << arr[i] <<'\n';
     }
 }
