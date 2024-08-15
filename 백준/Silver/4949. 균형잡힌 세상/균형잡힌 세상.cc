@@ -13,33 +13,33 @@ int main(void){
         getline(cin,str);
         if(str.at(0)=='.')break;
 
-        stack<int> stack;
-        int result = 1;
-        
+        char stack[100];
+        int top=0, result = 1;
+
         for(int i=0;i<str.length();i++){
             char chr = str.at(i);
             if(chr == '(' || chr == '['){
-                stack.push(chr);
+                stack[top++] = chr;
                 continue;
             }
             if(chr == ')'){
-                if(stack.empty() || stack.top() != '('){
+                if(!top|| stack[top-1] != '('){
                     result=0;
                     break;
                 }
-                stack.pop();
+                top--;
                 continue;
             }
             if(chr == ']'){
-                if(stack.empty() || stack.top() != '['){
+                if(!top|| stack[top-1] != '['){
                     result=0;
                     break;
                 }
-                stack.pop();
+                top--;
                 continue;
             }
         }
-        if(!stack.empty()){
+        if(top){
             result=0;
         }
         cout << (result?"yes\n":"no\n");
