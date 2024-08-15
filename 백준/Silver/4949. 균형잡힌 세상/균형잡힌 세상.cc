@@ -1,19 +1,20 @@
 #include <iostream>
+#include <string.h>
 #include <stack>
 using namespace std;
-typedef pair<int,int> node;
 
 int main(void){
     ios::sync_with_stdio(false);
-    cin.tie(NULL);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
     string str;
     while(true){ 
         getline(cin,str);
-        if(str==".")break;
+        if(str.at(0)=='.')break;
 
         stack<int> stack;
-        string result[2] = {"yes","no"};
-        int result_index = 0;
+        int result = 1;
         
         for(int i=0;i<str.length();i++){
             char chr = str.at(i);
@@ -23,7 +24,7 @@ int main(void){
             }
             if(chr == ')'){
                 if(stack.empty() || stack.top() != '('){
-                    result_index=1;
+                    result=0;
                     break;
                 }
                 stack.pop();
@@ -31,7 +32,7 @@ int main(void){
             }
             if(chr == ']'){
                 if(stack.empty() || stack.top() != '['){
-                    result_index=1;
+                    result=0;
                     break;
                 }
                 stack.pop();
@@ -39,8 +40,8 @@ int main(void){
             }
         }
         if(!stack.empty()){
-            result_index=1;
+            result=0;
         }
-        cout << result[result_index] << '\n';
+        cout << (result?"yes\n":"no\n");
     }
 }
