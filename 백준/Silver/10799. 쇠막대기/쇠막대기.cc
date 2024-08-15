@@ -1,5 +1,4 @@
 #include <cstdio>
-using namespace std;
 
 int main(void){
     int num=0,sum=0;
@@ -15,7 +14,6 @@ int main(void){
             before=s;
             continue;
         }
-        before=s;
         num--;
         sum++;
     }
