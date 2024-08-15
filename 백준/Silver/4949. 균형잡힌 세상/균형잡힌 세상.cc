@@ -1,5 +1,5 @@
 #include <iostream>
-#include <string.h>
+#include <cstring>
 #include <stack>
 using namespace std;
 
@@ -8,16 +8,16 @@ int main(void){
 	cin.tie(NULL);
 	cout.tie(NULL);
 
-    string str;
+    char str[101];
     while(true){ 
-        getline(cin,str);
-        if(str.at(0)=='.')break;
+        cin.getline(str,101);
+        if(str[0]=='.')break;
 
-        char stack[100];
+        char stack[101];
         int top=0, result = 1;
 
-        for(int i=0;i<str.length();i++){
-            char chr = str.at(i);
+        for(int i=0;i<strlen(str);i++){
+            char chr = str[i];
             if(chr == '(' || chr == '['){
                 stack[top++] = chr;
                 continue;
