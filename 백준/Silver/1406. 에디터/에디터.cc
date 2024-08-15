@@ -32,11 +32,6 @@ int main(void){
         }
         if(str.at(0)=='B'){
             if(cursor == lst.begin()) continue;
-            if(cursor == lst.end()){
-                lst.erase(--cursor);
-                cursor = lst.end();
-                continue;
-            }
             cursor = lst.erase(--cursor);
             continue;
         }
