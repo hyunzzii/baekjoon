@@ -18,23 +18,23 @@ int main(void){
         char c;
         cin >> c; //cin은 공백 빼고 입력받음
         if(c=='L'){
-            if(str.empty())continue;
-            stack.push(str.back());
-            str.pop_back();
-            continue;
+            if(!str.empty()){
+                stack.push(str.back());
+                str.pop_back();
+            }
         }
-        if(c=='D'){
-            if(stack.empty())continue;
-            str.push_back(stack.top());
-            stack.pop();
-            continue;
+        else if(c=='D'){
+            if(!stack.empty()){
+                str.push_back(stack.top());
+                stack.pop();
+            }
         }
-        if(c=='B'){
-            if(str.empty())continue;
-            str.pop_back();
-            continue;
+        else if(c=='B'){
+            if(!str.empty()){
+                str.pop_back();
+            }
         }
-        if(c=='P'){
+        else {
             cin >> c;
             str.push_back(c);
         }
