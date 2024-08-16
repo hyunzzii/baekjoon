@@ -1,5 +1,5 @@
 #include <iostream>
-#include <list>
+#include <stack>
 using namespace std;
 
 int main(void){
@@ -7,39 +7,43 @@ int main(void){
     cin.tie(NULL);
     cout.tie(NULL);
 
-    list<char> lst;
-    char c;
-
-    while((c=cin.get())!='\n'){
-        lst.push_back(c);
-    }
-
-    list<char>::iterator cursor = lst.end(),tem;
     string str;
+    cin >> str;
+
+    stack<char> stack;
     int t;
 
     cin >> t;
-    cin.ignore();
     while(t--){
-        getline(cin,str);
-        if(str.at(0)=='L'){
-            if(cursor != lst.begin()) cursor--;
+        char c;
+        cin >> c; //cin은 공백 빼고 입력받음
+        if(c=='L'){
+            if(str.empty())continue;
+            stack.push(str.back());
+            str.pop_back();
             continue;
         }
-        if(str.at(0)=='D'){
-            if(cursor != lst.end()) cursor++;
+        if(c=='D'){
+            if(stack.empty())continue;
+            str.push_back(stack.top());
+            stack.pop();
             continue;
         }
-        if(str.at(0)=='B'){
-            if(cursor == lst.begin()) continue;
-            cursor = lst.erase(--cursor);
+        if(c=='B'){
+            if(str.empty())continue;
+            str.pop_back();
             continue;
         }
-        if(str.at(0)=='P'){
-            lst.insert(cursor,str[2]);
+        if(c=='P'){
+            cin >> c;
+            str.push_back(c);
         }
     }
-    for(char c : lst){
+    for(char c : str){
         cout << c;
+    }
+    while(!stack.empty()){
+        cout << stack.top();
+        stack.pop();
     }
 }
