@@ -1,24 +1,21 @@
-#include <iostream>
-using namespace std;
-
+#include <cstdio>
 int main(void){
-    ios_base :: sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-
-    int n,tem,sum=0,result=0;
-    cin >> n;
+    int n,tem,i=0,sum=0,result=0;
+    scanf("%d",&n);
     int arr[1001] = {0,};
 
-    while(n--){
-        cin >> tem;
+    for(i=0;i<n;i++){
+        scanf("%d",&tem);
         arr[tem]++;
     }
-    for(int i=1;i<1001;i++){
+    i=0;
+    while(n>0){
         while(arr[i]--){
             result += sum + i;
             sum += i;
+            n--;
         }
+        i++;
     }
-    cout << result;
+    printf("%d",result);
 }
