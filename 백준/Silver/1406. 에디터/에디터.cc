@@ -39,9 +39,7 @@ int main(void){
             str.push_back(c);
         }
     }
-    for(char c : str){
-        cout << c;
-    }
+    cout << str;
     while(!stack.empty()){
         cout << stack.top();
         stack.pop();
