@@ -1,42 +1,72 @@
 #include <stdio.h>
-typedef struct node {
-	int num, b, se;
+#define min(a,b) ((a)<(b))?(a):(b)
+
+typedef struct node{
+    float start;
+    int end;
 }node;
-int* mergeSort(node* arr,int N, int n) {
-    int u, q = 0, tem, s;
-	node* c = malloc(sizeof(node) * 2 * N);
-	if (n > 2 * N) return arr;
-	for (int i = 0; i < 2 * N;) {
-		u = s = i + n;
-		if (i + 2 * n < 2 * N - 1) tem = i + 2 * n;
-		else tem = 2 * N ;
-		if (u > 2 * N - 1) {
-			while (q != tem) c[q++] = arr[i++];
-			break; }
-		else {
-			while (q != tem) {
-				if ((u != tem && arr[i].num > arr[u].num) || i == s ) c[q++]= arr[u++];
-				else if (arr[i].num < arr[u].num || u == tem) c[q++]= arr[i++];
-				else if (arr[i].num == arr[u].num) {
-					if (arr[i].se * arr[u].se == 2) {
-						if (arr[i].se > arr[u].se) c[q++] = arr[u++];
-						else c[q++] = arr[i++]; }
-					else if (arr[i].se < arr[u].se) c[q++] = arr[u++];
-					else c[q++]= arr[i++]; }}} 
-        i = tem; }
-    free(arr); mergeSort(c, N, 2 * n);}
-int main(void) {
-	int N, sum = 1;
-	scanf("%d", &N);
-	node *arr = malloc(sizeof(node) * 2 * N);
-    int *brr=malloc(sizeof(int) * 2 * N);
-	for (int i = 0; i < 2 * N; i++) {
-		scanf("%d", &arr[i].num);
-		arr[i].se = (i + 2) % 2;
-		if (arr[i].se == 1 && arr[i - 1].num == arr[i].num) arr[i].se = arr[i - 1].se = 2;
-		arr[i].b = (i + 2) / 2; }
-	node * d = mergeSort(arr,N, 2);
-	for (int i = 0; i < 2 * N; i++) {
-		if (brr[d[i].b] == sum) sum++;
-		else brr[d[i].b] = sum; }
-	printf("%d\n", --sum); }
+
+int* heap(node * nodeArr, int N);
+
+int main(int argc, const char * argv[]) {
+    int N;
+    scanf("%d",&N);
+    node *nodeArr = malloc(sizeof(node)*(N+1));
+    int* mrr = malloc(sizeof(int)*N);
+    
+    int pnt,child,temp,m=0;
+    
+    for(int i=1;i<N+1;i++){
+        scanf("%f %d",&nodeArr[i].start,&nodeArr[i].end);
+        if((int)nodeArr[i].start==nodeArr[i].end) continue;
+        nodeArr[i].start += 0.5;
+    }
+    int* srr = heap(nodeArr,N);
+
+    for(int i=N;i>0;i--){
+        temp = srr[i];
+        srr[i] = srr[1];
+        srr[1] = temp;
+        pnt = 1;
+        child = pnt*2;
+        while(child <= i-1){
+            child = nodeArr[srr[child]].start >= nodeArr[srr[min(child+1,i-1)]].start ? child : child+1;
+            if(nodeArr[srr[child]].start < nodeArr[srr[pnt]].start) break;
+            temp = srr[child];
+            srr[child]=srr[pnt];
+            srr[pnt]=temp;
+            pnt = child;
+            child = pnt*2;
+        }
+    }
+    mrr[m]=0;
+    mrr[++m] = nodeArr[srr[1]].end;
+    for(int i=2;i<N+1;i++){
+        if(mrr[m] <= (int)nodeArr[srr[i]].start){
+            mrr[++m] = nodeArr[srr[i]].end;
+            continue;
+        }
+        if(mrr[m-1] <= (int)nodeArr[srr[i]].start){
+            mrr[m] = nodeArr[srr[i]].end < mrr[m] ? nodeArr[srr[i]].end : mrr[m];
+        }
+    }
+    printf("%d",m);
+}
+int* heap(node* nodeArr, int N){
+    int* srr = malloc(sizeof(int)*(N+1));
+    int pnt,parent,temp;
+    
+    for(int i=1;i<N+1;i++){
+        srr[i]=i;
+        pnt=i;
+        while(pnt>1){
+            parent=pnt/2;
+            if(nodeArr[srr[parent]].start > nodeArr[srr[pnt]].start) break;
+            temp = srr[parent];
+            srr[parent]=srr[pnt];
+            srr[pnt]=temp;
+            pnt = parent;
+        }
+    }
+    return srr;
+}
