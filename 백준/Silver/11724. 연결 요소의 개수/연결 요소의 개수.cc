@@ -1,24 +1,12 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
-vector<vector<int>> adj;
-int arr[1001] = {0,}, stack[1000], top=0, cmpl=0;
-
-void visit(int num, int index){
-    int tem;
-    for(int i=0;i<adj[num].size();i++){
-        tem = adj[num][i];
-        if(!arr[tem]){
-            stack[top++] = tem;
-            arr[tem] = index;
-            cmpl++;
-        }
+int parents[1001];
+int find(int n){
+    if(parents[n] != n){
+        parents[n] = find(parents[n]);
     }
-    if(!top){
-        return;
-    }
-    visit(stack[--top], index);
+    return parents[n];
 }
 
 int main(void){
@@ -26,27 +14,25 @@ int main(void){
     cin.tie(NULL);
     cout.tie(NULL);
     
-    int n,m,u,v;
+    int n,m,u,v,result=0;
     cin >> n >> m;
 
-    for(int i=0;i<=n;i++){
-        vector<int> tem(1,i);
-        adj.push_back(tem);
+    for(int i=1;i<=n;i++){
+        parents[i] = i;
     }
 
     while(m--){
         cin >> u >> v;
-        adj[u].push_back(v);
-        adj[v].push_back(u);
-    }
-
-    int index=0,s;
-    do{
-        for(s=1;s<=n;s++){
-            if(!arr[s]) break;
+        u=find(u);
+        v=find(v);
+        if(u!=v){
+           parents[v] = parents[u];
         }
-        visit(s,++index);
-    }while(cmpl<n);
-
-    cout << index;
+    }
+    for(int i=1;i<=n;i++){
+        if(parents[i]==i){
+            result++;
+        }
+    }
+    cout << result;
 }
