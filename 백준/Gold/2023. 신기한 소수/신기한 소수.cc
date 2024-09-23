@@ -3,8 +3,6 @@
 #include <cmath>
 using namespace std;
 
-vector<vector<int>> pn;
-
 bool isPrime(int num){
     int root = sqrt(num);
     for(int i=2;i<=root;i++){
@@ -21,7 +19,7 @@ int main(void){
     
     int n;
     cin >> n;
-    pn.resize(n+1);
+    vector<vector<int>> pn(n+1);
 
     pn[1].push_back(2);
     pn[1].push_back(3);
