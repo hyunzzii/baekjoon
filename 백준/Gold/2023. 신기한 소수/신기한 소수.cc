@@ -1,43 +1,29 @@
-#include <iostream>
-#include <vector>
-using namespace std;
+#include <stdio.h>
 
-bool isPrime(int num){
+int n;
+void findPrime(int num, int m){
     for(int i=2;i*i<=num;i++){
         if(num%i==0){
-            return false;
+            return;
         }
     }
-    return true;
-} 
-int main(void){
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-    
-    int n;
-    cin >> n;
-    vector<vector<int>> pn(n+1);
-
-    pn[1].push_back(2);
-    pn[1].push_back(3);
-    pn[1].push_back(5);
-    pn[1].push_back(7);
-
     int x[4]={1,3,7,9};
-
-    for(int i=1;i<n;i++){
-        for(int n : pn[i]){
-            for(int j=0;j<4;j++){
-                int tem = n*10+x[j];
-                if(isPrime(tem)){
-                    pn[i+1].push_back(tem);
-                }
-            }
+    
+    if(m==n){
+        printf("%d\n",num);
+    }
+    else{
+        for(int i=0;i<4;i++){
+            findPrime(num*10 + x[i], m+1);
         }
     }
+} 
 
-    for(int n : pn[n]){
-        cout << n <<"\n";
-    }
+int main(void){
+    scanf("%d",&n);
+
+    findPrime(2,1);
+    findPrime(3,1);
+    findPrime(5,1);
+    findPrime(7,1);
 }
