@@ -28,7 +28,6 @@ int main(void){
         if(u!=v){
            parents[v] = parents[u];
         }
-        // 부모요소를 찾아서, 각각의 부모요소끼리 연결
     }
     for(int i=1;i<=n;i++){
         if(parents[i]==i){
