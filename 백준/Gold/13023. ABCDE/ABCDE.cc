@@ -1,3 +1,4 @@
+/* 트리의 깊이는 시작 노드에 따라 달라짐 */
 #include <iostream>
 #include <vector>
 using namespace std;
