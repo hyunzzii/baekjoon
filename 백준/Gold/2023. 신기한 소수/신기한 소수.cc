@@ -1,11 +1,9 @@
 #include <iostream>
 #include <vector>
-#include <cmath>
 using namespace std;
 
 bool isPrime(int num){
-    int root = sqrt(num);
-    for(int i=2;i<=root;i++){
+    for(int i=2;i*i<=num;i++){
         if(num%i==0){
             return false;
         }
