@@ -7,7 +7,7 @@ int n,m;
 vector<vector<int>> graph;
 
 int BFS(int k){
-    vector<bool> visited(n+1,false);
+    bool visited[10001] = {false,};
     queue<int> q;
 
     q.push(k);
@@ -34,13 +34,14 @@ int main(void){
 
     cin >> n >> m;
     graph.resize(n+1);
-    vector<int> arr(n+1,0);
+    int arr[10001]={0,};
 
     int a,b;
     while(m--){
         cin >> a >> b;
         graph[b].push_back(a);
     }
+
     int max = 0;
     for(int i=1;i<=n;i++){
         if(!graph[i].empty()){
