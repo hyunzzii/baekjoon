@@ -1,4 +1,4 @@
-#include <iostream>
+#include <cstdio>
 using namespace std;
 
 int n,m,k;
@@ -19,15 +19,11 @@ int DFS(int row, int col, int cnt){
 }
 
 int main(void){
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-
-    cin >> n >> m >> k;
-
+    scanf("%d %d %d",&n,&m,&k);
+    
     int r,c;
     while(k--){
-        cin >> r >> c;
+        scanf("%d %d",&r,&c);
         arr[r][c] = 1;
     }
 
@@ -42,5 +38,5 @@ int main(void){
             }
         }
     }
-    cout << max;
+    printf("%d",max);
 } 
