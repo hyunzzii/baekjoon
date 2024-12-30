@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
 int main(void){
@@ -10,7 +9,7 @@ int main(void){
     int n,k;
     cin >> n >> k;
 
-    vector<vector<int>> dp(n+1,vector<int>(k+1,0));
+    int dp[201][201] = {0,};
 
     for(int i=1;i<=n;i++){
         dp[i][1] = 1;
