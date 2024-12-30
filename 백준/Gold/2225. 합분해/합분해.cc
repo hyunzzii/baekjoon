@@ -1,13 +1,9 @@
-#include <iostream>
+#include <cstdio>
 using namespace std;
 
 int main(void){
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-
     int n,k;
-    cin >> n >> k;
+    scanf("%d %d",&n,&k);
 
     int dp[201][201] = {0,};
 
@@ -23,5 +19,5 @@ int main(void){
             dp[i][j] =(dp[i][j-1] + dp[i-1][j]) % 1000000000;
         }
     }
-    cout << dp[n][k];
+    printf("%d",dp[n][k]);
 } 
