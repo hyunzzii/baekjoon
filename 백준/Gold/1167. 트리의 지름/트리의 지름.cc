@@ -1,35 +1,32 @@
 #include <iostream>
+#include <queue>
 #include <vector>
-#include <algorithm>
 #include <utility>
 using namespace std;
-typedef pair<int,int> node; //first가 정점, second가 거리
+typedef pair<int,int> edge; //first가 정점, second가 거리
 
-int v, child_max=0;
-vector<vector<node>> tree;
-bool visited[100001] = {0,};
+int v, num=0;
+vector<vector<edge>> tree;
+vector<int> d;
 
-int DFS(int cur){
-    int result[2] = {0,}, tem = 0;
-    for(node next: tree[cur]){
-        if(!visited[next.first]){
-            visited[next.first] = true;
-            tem = DFS(next.first) + next.second;
-            if(tem > result[1]){
-                if(tem > result[0]){
-                    result[1] = result[0];
-                    result[0] = tem;
-                }
-                else{
-                    result[1] = tem;
+int BFS(int num){
+    int max_index = num;
+    queue<int> q;
+    q.push(num);
+    while(!q.empty()){
+        int cur = q.front();
+        q.pop();
+        for(edge next: tree[cur]){
+            if(!d[next.first] && next.first!=num){
+                q.push(next.first);
+                d[next.first] = d[cur] + next.second;
+                if(d[max_index] < d[next.first]){
+                    max_index = next.first;
                 }
             }
         }
     }
-    if(result[0]+result[1] > child_max){
-        child_max = result[0]+result[1];
-    }
-    return result[0];
+    return max_index;
 }
 
 int main(void){
@@ -39,18 +36,20 @@ int main(void){
 
     cin >> v;
     tree.resize(v+1);
+    d.resize(v+1,0);
 
-    int num,u,l;
+    int node,u,l;
     for(int i=0;i<v;i++){
-        cin >> num;
+        cin >> node;
         cin >> u;
         while(u>0){
             cin >> l;
-            tree[num].push_back(make_pair(u,l));
+            tree[node].push_back(make_pair(u,l));
             cin >> u;
         }
     }
-    visited[1] = true;
-    int result = DFS(1);
-    cout << max(result, child_max);
+    int m = BFS(1);
+    fill(d.begin(),d.end(),0);
+    int result = BFS(m);
+    cout << d[result];
 } 
