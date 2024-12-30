@@ -21,10 +21,7 @@ int main(void){
     
     for(int i=1;i<=n;i++){
         for(int j=2;j<=k;j++){
-            for(int l=0;l<=i;l++){
-                dp[i][j] += dp[l][j-1];
-                dp[i][j] %= 1000000000;
-            }
+            dp[i][j] =(dp[i][j-1] + dp[i-1][j]) % 1000000000;
         }
     }
     cout << dp[n][k];
