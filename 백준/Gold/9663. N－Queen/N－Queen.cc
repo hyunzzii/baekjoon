@@ -1,10 +1,8 @@
-#include <iostream>
-#include <vector>
+#include <cstdio>
 using namespace std;
 
 int n, sum = 0, arr[16][16] = {0,};
-
-void DFS(int x){
+void q(int x){
     if(x==n){
         sum++;
         return;
@@ -22,7 +20,7 @@ void DFS(int x){
                         arr[row][col - row + next]++;
                     }
                 }
-                DFS(next);
+                q(next);
                 for(int row=next;row<=n;row++){
                     arr[row][col]--;
                     if(col+row-next <= n){
@@ -38,11 +36,7 @@ void DFS(int x){
 }
 
 int main(void){
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-
-    cin >> n;
-    DFS(0);
-    cout << sum;
+    scanf("%d",&n);
+    q(0);
+    printf("%d",sum);
 } 
