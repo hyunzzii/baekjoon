@@ -41,13 +41,9 @@ int main(void){
         scanf(" %c %c %c",&a,&b,&c);
         if(b > 64){
             tree[a-64][0] = b-64;
-        }else{
-            tree[a-64][0] = 0;
         }
         if(c > 64){
             tree[a-64][1] = c-64;
-        }else{
-            tree[a-64][1] = 0;
         }
     }
     preorder(1);
