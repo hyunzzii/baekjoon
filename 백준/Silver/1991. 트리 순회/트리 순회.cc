@@ -1,9 +1,8 @@
 #include <cstdio>
-#include <vector>
 using namespace std;
 
 int n;
-vector<vector<int>> tree;
+int tree[27][2] = {0,};
 
 void preorder(int root){
     printf("%c",root+64);
@@ -36,20 +35,19 @@ void postorder(int root){
 
 int main(void){
     scanf("%d",&n);
-    tree.resize(n+1);
 
     char a,b,c;
     for(int i=0;i<n;i++){
         scanf(" %c %c %c",&a,&b,&c);
         if(b > 64){
-            tree[a-64].push_back(b-64);
+            tree[a-64][0] = b-64;
         }else{
-            tree[a-64].push_back(0);
+            tree[a-64][0] = 0;
         }
         if(c > 64){
-            tree[a-64].push_back(c-64);
+            tree[a-64][1] = c-64;
         }else{
-            tree[a-64].push_back(0);
+            tree[a-64][1] = 0;
         }
     }
     preorder(1);
