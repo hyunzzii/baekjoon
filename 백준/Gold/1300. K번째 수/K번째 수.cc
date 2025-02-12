@@ -2,7 +2,6 @@
 using namespace std;
 
 long long n,k;
-
 long long search(long long num){
     long long s=1, e=n;
     while(s<=e){
@@ -22,7 +21,6 @@ int main(void){
     cout.tie(NULL);
     
     cin >> n >> k;
-
     long long s=1,e=k;
     while(s <= e){
         long long sum=0,num;
