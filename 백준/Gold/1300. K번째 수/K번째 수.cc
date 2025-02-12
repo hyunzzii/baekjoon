@@ -1,17 +1,15 @@
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
-long long min(int a, int b){
-    return a <= b ? a : b;
-}
 int main(void){
     ios::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
 
-    long long n,k,s,e,sum,mid;
+    long long n,k;
     cin >> n >> k;
-    s=1, e=k;
+    long long s=1,e=k,sum,mid;
     while(s <= e){
         sum=0;
         mid = (s+e)/2;
