@@ -23,7 +23,7 @@ int main(void){
     
     cin >> n >> k;
 
-    long long s=1,e=n*n;
+    long long s=1,e=k;
     while(s <= e){
         long long sum=0,num;
         long long mid = (s+e)/2;
@@ -33,8 +33,7 @@ int main(void){
             while(i*num<=mid && num <=n){
                 num++;
             }
-            num--;
-            sum += num;
+            sum += --num;
         }
         if(sum<k){
             s = mid+1;
