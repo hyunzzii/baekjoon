@@ -3,9 +3,9 @@
 using namespace std;
 
 int n,c;
-long long arr[200000]={0,};
+unsigned arr[200000]={0,};
 
-int find(int index, long long num){
+int find(int index, unsigned num){
     for(int i=index;i<n;i++){
         if(arr[i] >= num){
             return i;
@@ -24,9 +24,9 @@ int main(void){
     }
     sort(arr,arr+n);
 
-    long long s=0,e=arr[n-1];
+    unsigned s=0,e=arr[n-1];
     while(s<=e){
-        long long mid = (s+e)/2;
+        unsigned mid = (s+e)/2;
         int cnt=1;
         for(int i=0;i<n && cnt<c;cnt++){
             i = find(i,arr[i]+mid);
