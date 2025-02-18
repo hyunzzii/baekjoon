@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cstdlib>
-#include <algorithm>
 using namespace std;
 
 int compare(int a, int b){
@@ -12,21 +11,21 @@ int main(void){
     cin.tie(NULL);
     cout.tie(NULL);
 
-    int n,arr[100000]={0,},min=0,sum;
+    int n,arr[100000]={0,},ans[2];
     cin >> n;
     for(int i=0;i<n;i++){
         cin >> arr[i];
     }
-    sort(arr,arr+n,compare);
 
-    for(int i=1;i<n-1;i++){
-        if(abs(arr[i]+arr[i+1]) < abs(arr[min]+arr[min+1])){
-            min = i;
+    int left=0,right=n-1,sum,min=2000000001;
+    while(left < right){
+        sum = arr[left]+arr[right];
+        if(abs(sum) < min){
+            min = abs(sum);
+            ans[0] = arr[left];
+            ans[1] = arr[right];
         }
+        sum<0 ? left++:right--;
     }
-    if(arr[min] < arr[min+1]){
-        cout << arr[min] << " " << arr[min+1];
-    }else{
-        cout << arr[min+1] << " " << arr[min];
-    }
+    cout << ans[0]<<" "<<ans[1];
 }
