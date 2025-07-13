@@ -1,5 +1,4 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
 int main(void){
@@ -7,17 +6,8 @@ int main(void){
     cin.tie(NULL);
     cout.tie(NULL);
 
-    int t,max=1;
-    cin >> t;
-    vector<int> arr = vector<int>(t);
+    int max = 1000000;
     unsigned long ans[1000001] = {0,};
-    for(int i=0;i<t;i++){
-        cin >> arr[i];
-        if(max < arr[i])
-        {
-            max = arr[i];
-        }
-    }
     ans[1]=1;
     for(int i=2;i<=max;i++){
         ans[i] += 1 + i;
@@ -27,9 +17,11 @@ int main(void){
     }
     for(int i=1;i<=max;i++){
         ans[i] += ans[i-1];
-
     }
+    int t,tmp;
+    cin >> t;
     for(int i=0;i<t;i++){
-        cout << ans[arr[i]]<<"\n";
+        cin >> tmp;
+        cout << ans[tmp]<<"\n";
     }
 }
