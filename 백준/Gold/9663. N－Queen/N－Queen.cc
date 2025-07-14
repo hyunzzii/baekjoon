@@ -1,42 +1,37 @@
-#include <cstdio>
+#include <iostream>
 using namespace std;
 
-int n, sum = 0, arr[16][16] = {0,};
-void q(int x){
-    if(x==n){
+int n,sum=0;
+int arr[15][15] = {0,};
+
+void func(int row){
+    if(row > n){
         sum++;
         return;
-    }else{
-        for(int col=1;col<=n;col++){
-            int next = x+1;
-            if(!arr[next][col]){
-                for(int row=next;row<=n;row++){
-
-                    arr[row][col]++;
-                    if(col+row-next <= n){
-                        arr[row][col + row - next]++;
-                    }
-                    if(col-row+next >= 1){
-                        arr[row][col - row + next]++;
-                    }
-                }
-                q(next);
-                for(int row=next;row<=n;row++){
-                    arr[row][col]--;
-                    if(col+row-next <= n){
-                        arr[row][col + row - next]--;
-                    }
-                    if(col-row+next >= 1){
-                        arr[row][col - row + next]--;
-                    }
-                }
+    }
+    for(int col=1;col<=n;col++){
+        if(!arr[row][col]){
+            for(int i=0;row+i<=n;i++){
+                arr[row+i][col]++;
+                if(col-i>0) arr[row+i][col-i]++;
+                if(col+i<=n) arr[row+i][col+i]++;
+            }
+            func(row+1);
+            for(int i=0;row+i<=n;i++){
+                arr[row+i][col]--;
+                if(col-i>0) arr[row+i][col-i]--;
+                if(col+i<=n) arr[row+i][col+i]--;
             }
         }
     }
 }
 
 int main(void){
-    scanf("%d",&n);
-    q(0);
-    printf("%d",sum);
-} 
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+    
+    cin >> n;
+    func(1);
+    cout << sum;
+}
