@@ -30,7 +30,7 @@ int main(void){
                 b = (b+M)%N;
                 ans += M;
             }
-        }while(!(a==1 && b==1) && ans <= M*N);
+        }while(!(a==1 && b==1));
         if(a==x&&b==y){
             cout << ans << "\n";
         }else{
