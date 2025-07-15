@@ -1,15 +1,11 @@
-#include <iostream>
+#include <cstdio>
 #include <algorithm>
 using namespace std;
 
 int main(void){
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-    
     int arr[9], sum = 0;
     for(int i=0;i<9;i++){
-        cin >> arr[i];
+        scanf("%d",&arr[i]);
         sum += arr[i];
     }
     int i,j,flag=0;
@@ -27,7 +23,7 @@ int main(void){
     }
     for(int k=0;k<9;k++){
         if(k!=i && k!=j){
-            cout << arr[k] << "\n";
+            printf("%d\n",arr[k]);
         }
     }
 }
