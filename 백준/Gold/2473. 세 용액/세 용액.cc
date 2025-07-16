@@ -2,6 +2,7 @@
 #include <algorithm>
 using namespace std;
 typedef long long ll;
+#define MAXSUM 3000000001
 
 int main(void){
     ios::sync_with_stdio(false);
@@ -15,35 +16,28 @@ int main(void){
         cin >> arr[i];
     }
     sort(arr,arr+n);
-
-    int base, left, right;
-    int ans[3], loca[2];
-    ll min=3000000001, locm, tmp;
+    int left, right, ans[3], a, b;
+    ll min=MAXSUM, sum, tmp;
     for(int i=0;i<n-2;i++){
-        base = arr[i];
         left = i+1;
         right = n-1;
-        locm = 3000000001;
+        sum = MAXSUM;
         while(left < right){
-            tmp = arr[left] + arr[right] + (ll)base;
-            if(abs(tmp) < locm){
-                locm = abs(tmp);
-                loca[0] = arr[left];
-                loca[1] = arr[right];
+            tmp = arr[left] + arr[right] + (ll)arr[i];
+            if(abs(tmp) < sum){
+                sum = abs(tmp);
+                a = left;
+                b = right;
             }
-            if(tmp==0){
-                break;
-            }else if(tmp > 0){
-                right--;
-            }else{
-                left++;
-            }
+            if(!tmp) break;
+            else if(tmp > 0) right--;
+            else left++;
         }
-        if(locm < min){
-            min = locm;
-            ans[0] = base;
-            ans[1] = loca[0];
-            ans[2] = loca[1];
+        if(sum < min){
+            min = sum;
+            ans[0] = arr[i];
+            ans[1] = arr[a];
+            ans[2] = arr[b];
         }
     }
     cout << ans[0] << " " << ans[1] << " " << ans[2];
