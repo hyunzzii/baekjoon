@@ -8,10 +8,8 @@ char str[10]="         ";
 void func_max(int idx, int before){
     str[idx]=before+'0';
     if(idx == k){
-        for(int i=0;i<=k;i++){
-            cout << str[i];
-        }
-        cout << "\n";
+        str[k+1] = '\0';
+        cout <<str<< "\n";
         flag=1;
     }
     for(int i=9; i>=0 && !flag; i--){
@@ -32,10 +30,8 @@ void func_max(int idx, int before){
 void func_min(int idx, int before){
     str[idx]=before+'0';
     if(idx == k){
-        for(int i=0;i<=k;i++){
-            cout << str[i];
-        }
-        cout << "\n";
+        str[k+1] = '\0';
+        cout <<str<< "\n";
         flag=1;
     }
     for(int i=0; i<=9 && !flag; i++){
