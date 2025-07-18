@@ -6,20 +6,6 @@ using namespace std;
 int N;
 int arr[100001] = {0,};
 
-int func(int s, int e, int target){
-    int min = INT_MAX, mid, tmp;
-    while(s <= e){
-        mid = (s+e)/2;
-        tmp = target +arr[mid];
-        if(abs(tmp) < abs(min)){
-            min = tmp;
-        }
-        if(!tmp) return 0;
-        else if(tmp > 0) e = mid - 1;
-        else s = mid + +1;
-    }
-    return min;
-}
 int main(void){
     ios::sync_with_stdio(false);
     cin.tie(NULL);
@@ -30,10 +16,14 @@ int main(void){
         cin >> arr[i];
     }
     sort(arr, arr+N);
+    int left=0, right=N-1;
     int min = INT_MAX, tmp;
-    for(int i=0;i<N-1;i++){
-        tmp = func(i+1, N-1, arr[i]);
+    while(left < right){
+        tmp = arr[left] + arr[right];
         if(abs(tmp) < abs(min)) min = tmp;
+        if(tmp > 0) right--;
+        else if(tmp < 0) left++;
+        else break; 
     }
     cout << min;
 }
