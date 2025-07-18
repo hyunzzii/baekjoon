@@ -1,4 +1,4 @@
-#include <iostream>
+#include <cstdio>
 #include <climits>
 using namespace std;
 
@@ -9,11 +9,7 @@ int min(int a, int b){
     return a < b ? a : b;
 }
 int main(void){
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-
-    cin >> N;
+    scanf("%d",&N);
     int a,b,c;
     for(int i=2;i<=N;i++){
         a=b=INT_MAX;
@@ -22,5 +18,5 @@ int main(void){
         if(i%3==0) b=arr[i/3];
         arr[i] = min(a,min(b,c)) + 1;
     }
-    cout << arr[N];
+    printf("%d",arr[N]);
 }
