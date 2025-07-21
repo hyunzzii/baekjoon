@@ -1,12 +1,11 @@
 #include <cstdio>
-int N;
-int arr[1001] = {0,};
-
 int max(int a, int b){
     return a > b ? a : b;
 }
 
 int main(void){
+    int N;
+    int arr[1001] = {0,};
     scanf("%d",&N);
     for(int i=1;i<=N;i++){
         scanf("%d",&arr[i]);
