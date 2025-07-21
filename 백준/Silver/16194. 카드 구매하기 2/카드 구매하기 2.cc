@@ -1,9 +1,5 @@
 #include <iostream>
 using namespace std;
-
-int N;
-int arr[1001] = {0,};
-
 int min(int a, int b){
     return a < b ? a : b;
 }
@@ -12,6 +8,9 @@ int main(void){
     ios::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
+
+    int N;
+    int arr[1001] = {0,};
 
     cin >> N;
     for(int i=1;i<=N;i++){
