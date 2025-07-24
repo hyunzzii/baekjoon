@@ -1,6 +1,4 @@
-#include <iostream>
-using namespace std;
-
+#include <cstdio>
 int N, arr[1000], dp[1000], idx=0;
 
 void change(int s, int e, int target){
@@ -17,13 +15,9 @@ void change(int s, int e, int target){
 }
 
 int main(void){
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-
-    cin >> N;
+    scanf("%d",&N);
     for(int i=0;i<N;i++){
-        cin >> arr[i];
+        scanf("%d",&arr[i]);
     }
     dp[0] = arr[0];
     for(int i=1;i<N;i++){
@@ -33,5 +27,5 @@ int main(void){
             change(0,idx,arr[i]);
         }
     }
-    cout << idx + 1;
+    printf("%d",idx+1);
 }
