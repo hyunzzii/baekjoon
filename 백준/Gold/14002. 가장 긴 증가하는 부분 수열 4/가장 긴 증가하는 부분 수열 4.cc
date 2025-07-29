@@ -1,7 +1,9 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
-int N, arr[1001], dp[1001][2] = {0,}, l[1001] = {0,}, result[1001];
+int N, arr[1001], dp[1001][2] = {0,}, l[1001] = {0,};
+string s = "";
 
 void change(int s, int e, int i){
     while(s < e){
@@ -23,10 +25,13 @@ int dfs(int n){
     else return dfs(l[n]) + 1;
 }
 
-void print(int dept, int i){
-    result[dept] = arr[i];
-    if(l[i] == 0) return;
-    print(dept-1, l[i]);
+void print(int i){
+    s = to_string(arr[i]) + ' ' + s;
+    if(l[i] == 0){
+        cout << s;
+        return;
+    }
+    print(l[i]);
 }
 
 int main(void){
@@ -53,11 +58,8 @@ int main(void){
     cout << len << "\n";
     for(int i=N;i>0;i--){
         if(dfs(i) == len){
-            print(len, i);
+            print(i);
             break;
         }
-    }
-    for(int i=1;i<=len;i++){
-        cout << result[i] << " ";
     }
 }
