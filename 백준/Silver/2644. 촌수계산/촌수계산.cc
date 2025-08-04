@@ -5,14 +5,11 @@ using namespace std;
 vector<vector<int>> graph;
 
 int n, m, x, y, a, b;
-int visited[101] = {0,}, flag=0, ans=-1;
+int visited[101] = {0,}, ans;
 
 void dfs(int n, int target, int dept){
     visited[n] = 1;
-    if(n == target){
-        flag=1;
-        ans += dept;
-    }
+    if(n == target) ans = dept;
     for(int v : graph[n]){
         if(!visited[v]){
             dfs(v, target, dept+1);
@@ -28,23 +25,11 @@ int main(void){
     cin >> a >> b;
     cin >> m;
     graph = vector<vector<int>> (n+1,vector<int>(0));
-    int parent[101] = {0,};
     while(m--){
         cin >> x >> y;
         graph[x].push_back(y);
-        parent[y] = x;
+        graph[y].push_back(x);
     }
-    int p = a;
-    while(p && !flag){
-        ans++;
-        if(p == b){
-            flag = 1;
-            break;
-        }
-        dfs(p, b, 0);
-        p = parent[p];
-    }
-    if(flag) cout << ans;
-    else cout << -1;
-
+    dfs(a,b,0);
+    cout << (ans > 0 ? ans : -1);
 }
