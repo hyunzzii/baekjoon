@@ -1,51 +1,50 @@
 #include <iostream>
-#include <stack>
 #include <vector>
+#include <queue>
 using namespace std;
+vector<vector<int>> graph;
+
+int n, m, x, y, a, b;
+int visited[101] = {0,}, flag=0, ans=-1;
+
+void dfs(int n, int target, int dept){
+    visited[n] = 1;
+    if(n == target){
+        flag=1;
+        ans += dept;
+    }
+    for(int v : graph[n]){
+        if(!visited[v]){
+            dfs(v, target, dept+1);
+        }
+    }
+}
 int main(void){
     ios::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
 
-    int n,a,b,m,x,y;
     cin >> n;
     cin >> a >> b;
     cin >> m;
-
-    vector<int> family(n+1,0);
+    graph = vector<vector<int>> (n+1,vector<int>(0));
+    int parent[101] = {0,};
     while(m--){
         cin >> x >> y;
-        family[y] = x;
+        graph[x].push_back(y);
+        parent[y] = x;
     }
-    stack<int> s1,s2;
-    s1.push(a);
-    s2.push(b);
-    while(true){
-        a = family[a];
-        if(a){
-            s1.push(a);
-        }
-        else{
+    int p = a;
+    while(p && !flag){
+        ans++;
+        if(p == b){
+            flag = 1;
             break;
         }
+        dfs(p, b, 0);
+        p = parent[p];
     }
-    while(true){
-        b = family[b];
-        if(b){
-            s2.push(b);
-        }
-        else{
-            break;
-        }
-    }
-    if(s1.top() == s2.top()){
-        do{
-            s1.pop();
-            s2.pop();
-        }while(!s1.empty() && !s2.empty() && s1.top() == s2.top());
-        cout << s1.size()+s2.size();
-    }
-    else{
-        cout << -1;
-    }
-} 
+    if(flag) cout << ans;
+    else cout << -1;
+
+}
