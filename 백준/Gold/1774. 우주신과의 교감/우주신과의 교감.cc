@@ -1,19 +1,12 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-// #include <cstdio>
-// #include <stack>
-// #include <queue>
-// #include <cstdlib>
-// #include <set>
 #include <cmath>
-// #include <string>
-// #include <climits>
 #include <iomanip>
 using namespace std;
 typedef struct node{
     int a,b;
-    double value;
+    long long value;
 }node;
 
 vector<node> arr;
@@ -28,10 +21,10 @@ int find(int r){
     return root[r] = find(root[r]);
 }
 
-double caculate(int x1, int y1, int x2, int y2){
+long long caculate(int x1, int y1, int x2, int y2){
     long long dx = abs(x1-x2);
     long long dy = abs(y1-y2);
-    return sqrt(dx*dx+dy*dy);
+    return dx*dx+dy*dy;
 }
 
 int main(void){
@@ -61,13 +54,15 @@ int main(void){
         if(ta < tb) root[tb] = ta;
         else root[ta] = tb;
     }
+    int cnt = M;
     for(int i=0;i<arr.size();i++){
         ta = find(arr[i].a);
         tb = find(arr[i].b);
         if(ta < tb) root[tb] = ta;
         else if(ta > tb) root[ta] = tb;
         else continue;
-        ans += arr[i].value;
+        ans += sqrt(arr[i].value);
+        if(++cnt == N) break;
     }
     cout << fixed << setprecision(2) << ans;
 }
