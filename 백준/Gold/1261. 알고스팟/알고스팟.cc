@@ -1,4 +1,4 @@
-#include <iostream>
+#include <cstdio>
 #include <queue>
 #include <climits>
 using namespace std;
@@ -10,20 +10,16 @@ typedef struct node{
 }node;
 
 int main(void){
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-    
     int dx[4] = {0,0,1,-1};
     int dy[4] = {1,-1,0,0};
 
     int N,M;
     char c;
-    cin >> M >> N;
+    scanf("%d %d",&M,&N);
     int arr[101][101], dp[101][101];
     for(int i=1;i<=N;i++){
         for(int j=1;j<=M;j++){
-            cin >> c;
+            scanf(" %c",&c);
             arr[i][j] = c - '0';
             dp[i][j] = INT_MAX;
         }
@@ -53,5 +49,5 @@ int main(void){
             }
         }
     }
-    cout << dp[N][M];
+    printf("%d",dp[N][M]);
 }
