@@ -1,7 +1,6 @@
 #include <iostream>
 #include <vector>
 #include <queue>
-#include <climits>
 using namespace std;
 
 int dx[4] = {1,-1,0,0};
@@ -13,15 +12,16 @@ int main(void){
 
     int n;
     cin >> n;
-    vector<vector<int>> board = vector<vector<int>>(n+1,vector<int>(n+1));
-    vector<vector<int>> arr = vector<vector<int>>(n+1,vector<int>(n+1,INT_MAX));
-    vector<vector<int>> brr = vector<vector<int>>(n+1,vector<int>(n+1,0));
+    int board[51][51];
+    int arr[51][51];
+    int brr[51][51] = {0,};
 
     char c;
     for(int i=1;i<=n;i++){
         for(int j=1;j<=n;j++){
             cin >> c;
             board[i][j] = c-'0';
+            arr[i][j] = 9999;
         }
     }
     deque<pair<int,int>> q;
