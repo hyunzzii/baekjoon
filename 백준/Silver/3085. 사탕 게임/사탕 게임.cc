@@ -1,4 +1,4 @@
-#include <iostream>
+#include <cstdio>
 using namespace std;
 
 int dx[4] = {0,1,-1,0};
@@ -25,14 +25,10 @@ int search(){
     return ans+1;
 }
 int main(void){
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
-
-    cin >> n;
+    scanf("%d",&n);
     for(int i=1;i<=n;i++){
         for(int j=1;j<=n;j++){
-            cin >> arr[i][j];
+            scanf(" %c",&arr[i][j]);
         }
     }
     int ans = 1, sum, tmp;
@@ -53,5 +49,5 @@ int main(void){
             }
         }
     }
-    cout << ans;
+    printf("%d",ans);
 }
