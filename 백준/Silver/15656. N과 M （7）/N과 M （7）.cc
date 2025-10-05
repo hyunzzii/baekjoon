@@ -1,15 +1,17 @@
-#include <cstdio>
+#include <iostream>
+#include <string>
 #include <algorithm>
 using namespace std;
 
 int N,M;
 int arr[8]={0,}, nrr[8]={0,};
+string output;
 void prt(int m){
     if(m == M){
         for(int i=0;i<M;i++){
-            printf("%d ",arr[i]);
+            output += to_string(arr[i]) + ' ';
         }
-        printf("\n");
+        output += '\n';
         return ;
     }
     for(int i = 0; i<N; i++){
@@ -19,10 +21,15 @@ void prt(int m){
 }
 
 int main(void){
-    scanf("%d %d",&N,&M);
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    cin >> N >> M;
     for(int i=0;i<N;i++){
-        scanf("%d",&nrr[i]);
+        cin >> nrr[i];
     }
     sort(nrr, nrr+N);
     prt(0);
+    cout << output;
 }
