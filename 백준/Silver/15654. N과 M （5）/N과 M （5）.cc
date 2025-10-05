@@ -3,7 +3,7 @@
 using namespace std;
 
 int N,M;
-int arr[8] = {0,}, nrr[8] = {10001,10001,10001,10001,10001,10001,10001,10001};
+int arr[8]={0,}, nrr[8]={0,};
 bool visited[8];
 void prt(int n, int m){
     if(m == M){
@@ -28,6 +28,6 @@ int main(void){
     for(int i=0;i<N;i++){
         scanf("%d",&nrr[i]);
     }
-    sort(nrr, nrr+8);
+    sort(nrr, nrr+N);
     prt(0,0);
 }
