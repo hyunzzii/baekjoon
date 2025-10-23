@@ -1,127 +1,57 @@
 #include <string>
 #include <vector>
-#include <cmath>
-#include <stack>
+#include <queue>
 
 using namespace std;
 
 extern string submit(int);
 
-stack<int> candidates;
-vector<vector<int>> arr;
-int nrr[4] = {0,0,0,0};
-
-void addCan(int num, int n){
-    if(n==4){
-        candidates.push(num);
-        return;
-    }
-    
-    for(int i=0;i<arr[n].size();i++){
-        int flag = 0;
-        for(int j=0; j<n; j++){
-            if(nrr[j] == arr[n][i]) flag = 1;
-        }
-        if(flag) continue;
-        nrr[n] = arr[n][i];
-        addCan(num + arr[n][i]*pow(10,3-n), n+1);
-    } 
-}
-
-void check(){
-    int cur = candidates.top();
-    if(candidates.size()==3){
-        int second = (cur%1000) / 100;
-        int third = (cur%100) / 10;
-        cur = cur - third*10 + second*10;
-    }
-    string r = submit(cur);
-    int strike = r[0] - '0';
-    int ball = r[3] - '0';
-    stack<int> new_candidates;
-    
-    int tcur[4] = {cur / 1000, (cur%1000) / 100, (cur%100)/10, cur%10};
-    while(!candidates.empty()){
-        int c = candidates.top();
-        candidates.pop();
-        int t_strike=0, t_ball=0;
-        int tc[4] = {c / 1000, (c%1000) / 100, (c%100) / 10, c%10};
-        for(int i=0;i<4;i++){
-            for(int j=0;j<4;j++){
-                if(tc[i] == tcur[j]){
-                    if(i == j) t_strike++;
-                    else t_ball++;
-                }
+bool check(int origin, int cur, int s, int b){
+    int odiv[4] = {origin/1000, origin%1000/100, origin%100/10, origin%10};
+    int cdiv[4] = {cur/1000, cur%1000/100, cur%100/10, cur%10};
+    int ts=0, tb=0;
+    for(int i=0;i<4;i++){
+        for(int j=0;j<4;j++){
+            if(odiv[i]==cdiv[j]){
+                if(i==j)ts++;
+                else tb++;
             }
         }
-        if(t_strike == strike && t_ball == ball){
-            new_candidates.push(c);
-        }
     }
-    candidates.swap(new_candidates);
+    return ts==s && tb==b ? true : false;
 }
 
 int solution(int n) {
-    int num = 0;
-    arr = vector<vector<int>>(4, vector<int>(0)); 
-    for(int i=1;i<=7;i+=2){
-        if(num==4) break;
-        string r = submit(i*1000 + i*100 + i*10 + i+1);
-        if(!r.compare("0S 4B")){
-            for(int j=0;j<3;j++){
-                arr[j].push_back(i+1);
+    queue<int> candidates;
+    for(int i = 1234; i <= 9876; i++) {
+        int idiv[4] = {i/1000, i%1000/100, i%100/10, i%10};
+        int flag = 1;
+        for(int j=0;j<4;j++){
+            if(!idiv[j]){
+                flag=0;
+                break;
             }
-            arr[3].push_back(i);
-            num+=2;
-        }
-        else if(!r.compare("0S 3B")){
-            arr[3].push_back(i);
-            num++;
-        }
-        else if(!r.compare("0S 1B")){
-            for(int j=0;j<3;j++){
-                arr[j].push_back(i+1);
+            for(int k=j+1;k<4;k++){
+                if(idiv[j]==idiv[k]) flag=0;
             }
-            num++;
         }
-        else if(!r.compare("1S 3B")){
-            for(int j=0;j<3;j++){
-                arr[j].push_back(i);
-                arr[j].push_back(i+1);
-            }
-            num+=2;
-        }
-        else if(!r.compare("1S 2B")){
-            for(int j=0;j<3;j++){
-                arr[j].push_back(i);
-            }
-            num++;
-        }
-        else if(!r.compare("1S 0B")){
-            arr[3].push_back(i+1);
-            num++;
-        }
-        else if(!r.compare("2S 2B")){
-            for(int j=0;j<3;j++){
-                arr[j].push_back(i);
-            }
-            arr[3].push_back(i+1);
-            num+=2;
-        }
+        if(flag) candidates.push(i);
     }
-    if(num != 4){
-        if(arr[0].size()==3){
-            arr[3].push_back(9);
-        }else{
-            for(int j=0;j<3;j++){
-                arr[j].push_back(9);
-            }
-        }
-    }
-    addCan(0,0);
+    
     while(candidates.size() > 1){
-        check();
+        int origin = candidates.front();
+        string str = submit(origin);
+        int s=str[0]-48, b=str[3]-48;
+        int tmp = 0;
+        while(true){
+            int cur = candidates.front();
+            if(cur == tmp) break;
+            candidates.pop();
+            if(check(origin, cur, s, b)){
+                if(!tmp) tmp = cur;
+                candidates.push(cur);
+            }
+        }
     }
-
-    return candidates.top();
+    return candidates.front();
 }
