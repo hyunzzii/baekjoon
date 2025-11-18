@@ -1,6 +1,5 @@
 #include <iostream>
 #include <algorithm>
-#include <vector>
 using namespace std;
 
 
@@ -12,11 +11,11 @@ int main(void){
     int n,v,m;
     cin >> n;
     
-    vector<int> arr(n,0);
+    int arr[100000];
     for(int i=0;i<n;i++){
         cin >> arr[i];
     }
-    sort(arr.begin(),arr.end()); //오름차순
+    sort(arr,arr+n); //오름차순
 
     cin >> m;
     while(m--){
